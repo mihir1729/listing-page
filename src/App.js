@@ -1,9 +1,15 @@
 import React from "react";
-
-const rootUrl = "https://api.github.com";
+import { Info, Pagination, Repo, Search } from "./components/index";
 
 function App() {
-	return <div className='App'></div>;
+	return (
+		<>
+			<Search />
+			<Info />
+			<Repo />
+			<Pagination />
+		</>
+	);
 }
 
 export default App;
