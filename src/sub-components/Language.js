@@ -1,7 +1,7 @@
 import React from "react";
 
-const Language = () => {
-	return <div>Language</div>;
+const Language = ({ allLanguages }) => {
+	return <div>{allLanguages}</div>;
 };
 
 export default Language;

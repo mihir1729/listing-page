@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { GithubContext } from "../context/context";
 
 const Search = () => {
 	const { searchGithubUser, isLoading, setIsLoading, repos } =
 		React.useContext(GithubContext);
 
-	if (!repos) {
-		setIsLoading(true);
-		searchGithubUser("mihir1729");
-	}
+	// useEffect(() => {
+	// 	if (!repos) {
+	// 		setIsLoading(true);
+	// 		searchGithubUser("mihir1729");
+	// 	}
+	// }, [repos]);
+
+	searchGithubUser("mihir1729");
 
 	return <div>Search</div>;
 };

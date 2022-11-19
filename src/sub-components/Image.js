@@ -5,7 +5,6 @@ const Image = () => {
 	const { githubUser } = React.useContext(GithubContext);
 
 	if (githubUser) {
-		console.log(githubUser);
 		const { avatar_url, html_url } = githubUser;
 		return (
 			<div>
