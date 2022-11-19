@@ -5,14 +5,14 @@ const Search = () => {
 	const { searchGithubUser, isLoading, setIsLoading, repos } =
 		React.useContext(GithubContext);
 
-	// useEffect(() => {
-	// 	if (!repos) {
-	// 		setIsLoading(true);
-	// 		searchGithubUser("mihir1729");
-	// 	}
-	// }, [repos]);
+	useEffect(() => {
+		if (!repos) {
+			setIsLoading(true);
+			searchGithubUser("mihir1729");
+		}
+	}, []);
 
-	searchGithubUser("mihir1729");
+	// searchGithubUser("mihir1729");
 
 	return <div>Search</div>;
 };
