@@ -1,26 +1,15 @@
-import React from "react";
-import { GithubContext } from "../context/context";
+import React, { useEffect } from "react";
 import { Language } from "./index";
-import axios from "axios";
 
-const rootUrl = "https://api.github.com";
-
-const Repos = ({ name, description }) => {
-	const { githubUser, searchLanguages, languages, setIsLoading } =
-		React.useContext(GithubContext);
-
-	if (githubUser) {
-		setIsLoading(true);
-		searchLanguages(name, githubUser);
-	}
-
+const Repos = ({ name, description, allLanguages }) => {
 	return (
 		<div>
 			<h2>{name}</h2>
 			<p>{description}</p>
-			<Language />
+			<Language languages={allLanguages} />
 		</div>
 	);
 };
 
 export default Repos;
+sssssss;

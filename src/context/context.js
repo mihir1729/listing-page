@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Octokit } from "octokit";
+import user from "./mockData/mockUser";
+import repo from "./mockData/mockRepo";
 
 const rootUrl = "https://api.github.com";
 
 const GithubContext = React.createContext();
+
+const octokit = new Octokit({
+	auth: process.env.GITHUB_TOKEN,
+});
 
 const GithubProvider = ({ children }) => {
 	const [isLoading, setIsLoading] = useState(false);
@@ -11,45 +18,40 @@ const GithubProvider = ({ children }) => {
 	const [githubUser, setGithubUser] = useState();
 	const [repos, setRepos] = useState();
 	const [languages, setLanguages] = useState([]);
+	const [mockUser, setMockUser] = useState(user);
+	const [mockRepo, setMockRepo] = useState(repo);
 
 	const searchGithubUser = async (user) => {
-		const response = await axios(`${rootUrl}/users/${user}`).catch((err) =>
-			console.log(err)
-		);
+		// const response = await octokit.request(`GET /users/${user}`, {});
 
-		if (response) {
-			setGithubUser(response.data);
-			const { login } = response.data;
+		if (mockUser) {
+			//replace mockUser with response.data
+			// setGithubUser(response.data);
+			setGithubUser(mockUser); //delete this and uncomment above lines
+			const { login } = mockUser; //add response.data inplace of mockUser
 
-			await axios(`${rootUrl}/users/${login}/repos?per_page=100`)
-				.then((results) => {
-					const status = 200;
+			// try {
+			// 	const result = await octokit.request(
+			// 		`GET /users/${login}/repos?per_page=10`,
+			// 		{}
+			// 	);
 
-					if (results.status === status) {
-						setRepos(results.data);
-					}
-				})
-				.catch((err) => console.log(err));
+			// 	setRepos(result.data);
+			// 	console.log(result.data);
+
+			// 	console.log(
+			// 		`Success! Status: ${result.status}. Rate limit remaining: ${result.headers["x-ratelimit-remaining"]}`
+			// 	);
+			// } catch (error) {
+			// 	console.log(
+			// 		`Error! Status: ${error.status}. Rate limit remaining: ${error.headers["x-ratelimit-remaining"]}. Message: ${error.response.data.message}`
+			// 	);
+			// }
+			// Uncommment the try catch block and delete below code
+			setRepos(mockRepo);
 		} else {
 			toggleError(true, "there is no user with that username");
 		}
-
-		setIsLoading(false);
-	};
-
-	const searchLanguages = async (repoName, githubUser) => {
-		if (setIsLoading) {
-			const { login } = githubUser;
-			const response = await axios(
-				`${rootUrl}/repos/${login}/${repoName}/languages`
-			).catch((err) => console.log(err));
-			console.log(response);
-			if (response) {
-				setLanguages(response.data);
-			}
-		}
-
-		setIsLoading(false);
 	};
 
 	function toggleError(show = false, msg = "") {
@@ -67,6 +69,7 @@ const GithubProvider = ({ children }) => {
 				githubUser,
 				searchLanguages,
 				languages,
+				octokit,
 			}}
 		>
 			{children}
