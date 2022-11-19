@@ -2,10 +2,12 @@ import React from "react";
 import { GithubContext } from "../context/context";
 
 const Search = () => {
-	const { searchGithubUser, isLoading } = React.useContext(GithubContext);
+	const { searchGithubUser, isLoading, setIsLoading, repos } =
+		React.useContext(GithubContext);
 
-	if (isLoading) {
-		// searchGithubUser("mihir1729");
+	if (!repos) {
+		setIsLoading(true);
+		searchGithubUser("mihir1729");
 	}
 
 	return <div>Search</div>;
