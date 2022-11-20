@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Octokit } from "octokit";
 import { GithubContext } from "./github_context";
 
 const PageContext = React.createContext();

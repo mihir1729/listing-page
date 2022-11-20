@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { GithubContext } from "../context/github_context";
+import styled from "styled-components";
 
 const Language = ({ name }) => {
 	const { githubUser, octokit } = React.useContext(GithubContext);
@@ -34,14 +35,45 @@ const Language = ({ name }) => {
 
 	const fetchLanguage = async () => {
 		if (githubUser) {
-			const result = await searchLanguages(name, githubUser, setRepoLanguages);
+			await searchLanguages(name, githubUser, setRepoLanguages);
 		}
 	};
 	if (!repoLanguages) {
 		fetchLanguage();
 	}
 
-	return <div>{repoLanguages}</div>;
+	return (
+		<div>
+			<Wrapper>
+				{repoLanguages &&
+					repoLanguages.map((language, index) => {
+						return (
+							<p
+								key={index}
+								style={{
+									marginRight: "1rem",
+									marginLeft: "1rem",
+									background: "#044c53",
+									color: "white",
+									padding: "0.3rem",
+								}}
+							>
+								{language}
+							</p>
+						);
+					})}
+			</Wrapper>
+		</div>
+	);
 };
+
+const Wrapper = styled.div`
+	display: flex;
+
+	p {
+		margin: 0;
+		font-weight: 600;
+	}
+`;
 
 export default Language;

@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { Octokit } from "octokit";
 import user from "./mockData/mockUser";
 import repo from "./mockData/mockRepo";
-
-const rootUrl = "https://api.github.com";
 
 const GithubContext = React.createContext();
 
@@ -28,29 +25,7 @@ const GithubProvider = ({ children }) => {
 		const response = await octokit.request(`GET /users/${user}`, {});
 
 		if (response) {
-			//replace mockUser with response.data
 			setGithubUser(response.data);
-			// setGithubUser(mockUser); //delete this and uncomment above lines
-			// const { login } = mockUser; //add response.data inplace of mockUser
-
-			// try {
-			// 	const result = await octokit.request(
-			// 		`GET /users/${login}/repos?per_page=6`,
-			// 		{}
-			// 	);
-
-			// 	setRepos(result.data);
-
-			// 	console.log(
-			// 		`Success! Status: ${result.status}. Rate limit remaining: ${result.headers["x-ratelimit-remaining"]}`
-			// 	);
-			// } catch (error) {
-			// 	console.log(
-			// 		`Error! Status: ${error.status}. Rate limit remaining: ${error.headers["x-ratelimit-remaining"]}. Message: ${error.response.data.message}`
-			// 	);
-			// }
-			// Uncommment the try catch block and delete below code
-			// setRepos(mockRepo); //setRepos is not necessary here
 		} else {
 			toggleError(true, "there is no user with that username");
 		}

@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { PageContext } from "../context/page_context";
 import { GithubContext } from "../context/github_context";
+import styled from "styled-components";
 
 const Pages = () => {
-	const { page, setPage, prevPage, lastPage, fetchRepos } =
-		React.useContext(PageContext);
+	const { lastPage, fetchRepos } = React.useContext(PageContext);
 	const { repos } = React.useContext(GithubContext);
 
 	const pagesArray = [];
@@ -15,21 +15,43 @@ const Pages = () => {
 	if (repos) {
 		return (
 			<div>
-				{pagesArray.map((page, index) => {
-					return (
-						<button
-							key={index}
-							onClick={() => {
-								fetchRepos(page);
-							}}
-						>
-							{page}
-						</button>
-					);
-				})}
+				<Wrapper>
+					{pagesArray.map((page, index) => {
+						return (
+							<button
+								key={index}
+								onClick={() => {
+									fetchRepos(page);
+								}}
+							>
+								{page}
+							</button>
+						);
+					})}
+				</Wrapper>
 			</div>
 		);
 	}
 };
+
+const Wrapper = styled.div`
+	display: flex;
+	justify-content: center;
+	margin-top: 2rem;
+
+	button {
+		margin-left: 0.4rem;
+		border: none;
+		font-size: 1.4rem;
+		cursor: pointer;
+		background: #88ebf2;
+		height: 40px;
+		width: 40px;
+	}
+
+	button:hover {
+		background: #e0fcff;
+	}
+`;
 
 export default Pages;
