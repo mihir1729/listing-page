@@ -18,18 +18,19 @@ const GithubProvider = ({ children }) => {
 	const [error, setError] = useState({ show: false, msg: "" });
 	const [githubUser, setGithubUser] = useState();
 	const [repos, setRepos] = useState();
+	const [userName, setUserName] = useState("");
 
 	//mock data to limit api requests
 	const [mockUser, setMockUser] = useState(user);
 	const [mockRepo, setMockRepo] = useState(repo);
 
 	const searchGithubUser = async (user) => {
-		// const response = await octokit.request(`GET /users/${user}`, {});
+		const response = await octokit.request(`GET /users/${user}`, {});
 
-		if (mockUser) {
+		if (response) {
 			//replace mockUser with response.data
-			// setGithubUser(response.data);
-			setGithubUser(mockUser); //delete this and uncomment above lines
+			setGithubUser(response.data);
+			// setGithubUser(mockUser); //delete this and uncomment above lines
 			// const { login } = mockUser; //add response.data inplace of mockUser
 
 			// try {
@@ -70,6 +71,8 @@ const GithubProvider = ({ children }) => {
 				githubUser,
 				octokit,
 				setRepos,
+				userName,
+				setUserName,
 			}}
 		>
 			{children}

@@ -5,7 +5,7 @@ import { GithubContext } from "./github_context";
 const PageContext = React.createContext();
 
 const PageProvider = ({ children }) => {
-	const { octokit, setRepos } = React.useContext(GithubContext);
+	const { octokit, setRepos, githubUser } = React.useContext(GithubContext);
 
 	const [isLoading, setIsLoading] = useState(true);
 	const [page, setPage] = useState(1);
@@ -15,10 +15,11 @@ const PageProvider = ({ children }) => {
 	const [lastPage, setLastPage] = useState(1);
 
 	const fetchRepos = async (page) => {
-		// const { login } = mockUser; //set this in sync with Githubuser and change below in the request as well
+		const { login } = githubUser;
+
 		try {
 			const result = await octokit.request(
-				`GET /users/mihir1729/repos?per_page=6&page=${page}`,
+				`GET /users/${login}/repos?per_page=6&page=${page}`,
 				{}
 			);
 
@@ -58,8 +59,10 @@ const PageProvider = ({ children }) => {
 	};
 
 	useEffect(() => {
-		fetchRepos(page);
-	}, []);
+		if (githubUser) {
+			fetchRepos(page);
+		}
+	}, [githubUser]);
 
 	return (
 		<PageContext.Provider
