@@ -31,7 +31,7 @@ const PageProvider = ({ children }) => {
 				setNextPage(parseInt(parsed.next.page));
 				setPrevPage(parseInt(parsed.last.page));
 				setLastPage(parseInt(parsed.last.page));
-			} else if (page === parseInt(parsed.last.page)) {
+			} else if (page === lastPage) {
 				setNextPage(parseInt(parsed.first.page));
 				setPrevPage(parseInt(parsed.prev.page));
 				setFirstPage(parseInt(parsed.first.page));
