@@ -2,13 +2,16 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
-import { GithubProvider } from "./context/context";
+import { GithubProvider } from "./context/github_context";
+import { PageProvider } from "./context/page_context";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
 	<React.StrictMode>
 		<GithubProvider>
-			<App />
+			<PageProvider>
+				<App />
+			</PageProvider>
 		</GithubProvider>
 	</React.StrictMode>
 );

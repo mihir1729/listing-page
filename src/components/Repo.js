@@ -1,5 +1,5 @@
 import React from "react";
-import { GithubContext } from "../context/context";
+import { GithubContext } from "../context/github_context";
 import { Repos } from "../sub-components/index";
 
 const Repo = () => {

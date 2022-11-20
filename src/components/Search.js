@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { GithubContext } from "../context/context";
+import { GithubContext } from "../context/github_context";
 
 const Search = () => {
 	const { searchGithubUser, isLoading, setIsLoading, repos } =

@@ -49,7 +49,7 @@ const GithubProvider = ({ children }) => {
 			// 	);
 			// }
 			// Uncommment the try catch block and delete below code
-			setRepos(mockRepo);
+			// setRepos(mockRepo); //setRepos is not necessary here
 		} else {
 			toggleError(true, "there is no user with that username");
 		}

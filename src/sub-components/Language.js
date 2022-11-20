@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { GithubContext } from "../context/context";
+import { GithubContext } from "../context/github_context";
 
 const Language = ({ name }) => {
 	const { githubUser, octokit } = React.useContext(GithubContext);
