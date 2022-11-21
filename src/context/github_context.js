@@ -29,6 +29,8 @@ const GithubProvider = ({ children }) => {
 		} else {
 			toggleError(true, "there is no user with that username");
 		}
+
+		setIsLoading(false);
 	};
 
 	function toggleError(show = false, msg = "") {

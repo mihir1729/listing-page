@@ -6,7 +6,7 @@ const PageContext = React.createContext();
 const PageProvider = ({ children }) => {
 	const { octokit, setRepos, githubUser } = React.useContext(GithubContext);
 
-	const [isLoading, setIsLoading] = useState(true);
+	const [isRepoLoading, setIsRepoLoading] = useState(false);
 	const [page, setPage] = useState(1);
 	const [nextPage, setNextPage] = useState(1);
 	const [prevPage, setPrevPage] = useState(1);
@@ -46,8 +46,8 @@ const PageProvider = ({ children }) => {
 				console.log(
 					`Success! Status: ${result.status}. Rate limit remaining: ${result.headers["x-ratelimit-remaining"]}`
 				);
+				setIsRepoLoading(false);
 			}
-			setIsLoading(false);
 		} catch (error) {
 			if (error.headers) {
 				console.log(
@@ -59,6 +59,7 @@ const PageProvider = ({ children }) => {
 
 	useEffect(() => {
 		if (githubUser) {
+			setIsRepoLoading(true);
 			fetchRepos(page);
 		}
 	}, [githubUser]);

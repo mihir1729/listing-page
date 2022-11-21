@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { GithubContext } from "../context/github_context";
 import styled from "styled-components";
 
@@ -22,7 +22,6 @@ const Language = ({ name }) => {
 					setRepoLanguages(table);
 				}
 			}
-
 			console.log(
 				`Success! Status: ${result.status}. Rate limit remaining: ${result.headers["x-ratelimit-remaining"]}`
 			);
@@ -38,9 +37,10 @@ const Language = ({ name }) => {
 			await searchLanguages(name, githubUser, setRepoLanguages);
 		}
 	};
-	if (!repoLanguages) {
+
+	useEffect(() => {
 		fetchLanguage();
-	}
+	}, []);
 
 	return (
 		<div>
