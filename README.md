@@ -15,7 +15,7 @@
 - `http://localhost:3000/`
 
 
-## Active Deployment
+## Continous Deployment
 
-### - The project is hosted live on netlify on the below url.
-- `https://github-repo-listing-page.netlify.app/`
+### - The project is hosted live on netlify and is connected to this repository.
+[Project Link](https://github-repo-listing-page.netlify.app/)
